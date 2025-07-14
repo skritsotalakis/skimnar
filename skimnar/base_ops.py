@@ -3,7 +3,7 @@ from skimnar.utils import _selector_map, from_valid_native
 import narwhals as nw
 import rich
 from rich.table import Table
-from typing import Union
+from typing import Union, Literal
 from narwhals.typing import IntoDataFrame
 from narwhals.dataframe import DataFrame
 
@@ -31,6 +31,11 @@ class BaseFrame(ABC):
     def concat_horizontal(self, col_name: str) -> DataFrame:
         pass
 
+    def is_column_null(self, col_name: str) -> Literal[True, False]:
+        if self.df[col_name].null_count() == self.df[col_name].len():
+            return True
+        return False
+
     def select_frame(self) -> DataFrame:
         frame = self.base_df.select(self.selector)
         if frame.is_empty():
@@ -42,8 +47,9 @@ class BaseFrame(ABC):
         col_list = self.df.columns
         results = []
         for col_name in col_list:
-            result = self.concat_horizontal(col_name)
-            results.append(result)
+            if not self.is_column_null(col_name):
+                result = self.concat_horizontal(col_name)
+                results.append(result)
         return nw.concat(results, how="vertical")
 
     def frame_to_table(self, title: str) -> rich.table.Table:
