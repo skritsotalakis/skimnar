@@ -32,12 +32,32 @@ from skimnar.frames.numeric_ops import NumericFrame
 df = NumericFrame(df_native).sum_df # df is a narwhals dataframe
 df.to_pandas() # Get back a pandas dataframe
 ```
+
+```
+   Nulls  Null%   mean    std   min   q25  median    q75    max  outliers      hist
+0     50    5.0   0.51   0.30 -0.47  0.31    0.51   0.70   1.66        43   ▁▄▇▅▂
+0      0    0.0   2.07   1.00 -0.94  1.39    2.06   2.73   5.19        47   ▁▄▇▆▄▁
+0      0    0.0  10.02   2.95  0.94  8.06   10.00  11.98  21.78        47   ▂▅▇▅▂
+0     30    3.0   1.93   1.95  0.00  0.57    1.32   2.61  12.19        87  ▇▃▂▁
+0      0    0.0  14.94  14.49 -9.95  2.58   14.27  27.43  39.97         0  ▆▇▇▆▆▆▆▇
+0      0    0.0   3.96   2.85  0.09  1.95    3.24   5.38  19.26        63  ▇▇▃▁▁
+```
 #### II. Get back a rich table of summary statistics
 ```python
 import polars as pl
 df_native = pl.DataFrame({...})
 from skimnar.frames.string_ops import StringFrame
 StringFrame(df_native).table
+```
+
+```
+STRING
+┏━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Column Name  ┃ Nulls ┃ Null% ┃ total_chars ┃ chars/row ┃ total_words ┃ words/row ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ product_name │   0   │  0.0  │    12000    │   12.0    │    2000     │    2.0    │
+│ mixed_object │   0   │  0.0  │    11568    │   11.57   │    2669     │   2.67    │
+└──────────────┴───────┴───────┴─────────────┴───────────┴─────────────┴───────────┘
 ```
 
 
