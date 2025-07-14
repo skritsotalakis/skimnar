@@ -11,7 +11,7 @@ It is inspired from the skimpy tool and utilizes narwhals and rich libraries.
 
 ### A. Get summary statistics for all columns of your dataframe:
 
-Given a narwhals-native dataframe (e.g. pandas, Polars, Pyarrow), skimnar produces summary statistics in the terminal.
+Given a narwhals or a narwhals-native dataframe (e.g. pandas, Polars, Pyarrow), skimnar produces summary statistics in the terminal.
 
 ```python
 from skimnar import skimnar
