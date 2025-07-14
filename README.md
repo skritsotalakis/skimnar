@@ -43,8 +43,8 @@ StringFrame(df_native).table
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/yourrepo.git
-cd yourrepo
+git clone git@github.com:skritsotalakis/skimnar.git
+cd skimnar
 pip install -e .
 ```
 
