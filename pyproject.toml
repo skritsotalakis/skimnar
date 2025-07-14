@@ -1,0 +1,46 @@
+[project]
+name = "skimnar"
+version = "0.1.0"
+description = "Summary Statistics using narwhals and rich"
+authors = [
+{name = "Stelios Kritsotalakis", email = "stelioskritsotalakis@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+keywords = ["statistics", "EDA", "summary", "narwhals", "rich"]
+dependencies = [
+    "narwhals>=1.45.0",
+    "rich>=14.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.16.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.2",
+]
+
+[project.urls]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 90
+fix = true
+target-version = "py38" # maybe "py311"?
+
+[tool.ruff.lint]
+preview = true
+explicit-preview-rules = true
+
+[tool.mypy]
+files = ["skimnar", "tests"]
+show_error_codes = true
+show_error_context = true
+show_column_numbers = true
+pretty = true
+incremental = false
+strict = true
