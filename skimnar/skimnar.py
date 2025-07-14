@@ -32,8 +32,8 @@ def skimnar(df_native: IntoDataFrame) -> Any:
 
     final_panel = Panel(
         grid,
-        title="NARWOW SUMMARY START",
-        subtitle="NARWOW SUMMARY END",
+        title="SUMMARY START",
+        subtitle="SUMMARY END",
         border_style="bold  #A9A9A9",
         padding=(1, 0),
     )
