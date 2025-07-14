@@ -1,8 +1,8 @@
 # Skimnar
 
 Skimnar is a tool that provides summary statistics in the terminal for variables of different data types in dataframes.
-Skimnar is inspired from the skimpy tool and utilizes narwhals and rich libraries.
 Additionally, users can get data type specific summary dataframes and tables.
+It is inspired from the skimpy tool and utilizes narwhals and rich libraries.
 
 
 ## Usage
