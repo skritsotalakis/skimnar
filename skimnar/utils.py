@@ -53,7 +53,7 @@ def dtype_instance_map() -> Dict[Type[BaseFrame], Dtype_nw]:
     }
 
 
-def get_frame_type(dtype: Dtype_nw) -> Any:
+def get_frame_type(dtype: nw_dtypes.DType) -> Any:
     for frame_type, nw_dtype_class in dtype_instance_map().items():
         if isinstance(dtype, nw_dtype_class):
             return frame_type
