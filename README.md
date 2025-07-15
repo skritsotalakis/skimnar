@@ -24,10 +24,11 @@ Import any data type specific skimnar class object (NumericFrame, StringFrame, C
 #### I. Get back narwhals dataframe containing summary statistics
 Use the output to apply extra operations leveraging narwhals api or just get back a dataframe of your choice.
 
+Example:
 
 ```python
 import pandas as pd
-df_native = pd.DataFrame({...})
+df_native = pd.read_parquet("tests/data/synthetic_dataset.parquet")
 from skimnar.frames.numeric_ops import NumericFrame
 df = NumericFrame(df_native).sum_df # df is a narwhals dataframe
 df.to_pandas() # Get back a pandas dataframe
@@ -42,6 +43,27 @@ df.to_pandas() # Get back a pandas dataframe
 0      0    0.0  14.94  14.49 -9.95  2.58   14.27  27.43  39.97         0  ▆▇▇▆▆▆▆▇
 0      0    0.0   3.96   2.85  0.09  1.95    3.24   5.38  19.26        63  ▇▇▃▁▁
 ```
+
+Example:
+
+```python
+import pandas as pd
+df_native = pd.read_parquet("tests/data/synthetic_dataset.parquet")
+from skimnar.frames.numeric_ops import NumericFrame
+num_frame = NumericFrame()
+num_frame.get_sum_df("weight")
+```
+
+```
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+|                              Narwhals DataFrame                               |
+|-------------------------------------------------------------------------------|
+|   Nulls  Null%  mean   std  min   q25  median   q75    max  outliers      hist|
+|0     30    3.0  1.93  1.95  0.0  0.57    1.32  2.61  12.19        87  ▇▃▂▁    |
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
 #### II. Get back a rich table of summary statistics
 ```python
 import polars as pl
