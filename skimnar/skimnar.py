@@ -1,6 +1,7 @@
 import subprocess
 from io import StringIO
 from rich.console import Console
+from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
 from typing import Any
@@ -26,14 +27,19 @@ def skimnar(df_native: IntoDataFrame) -> Any:
 
     if not _types:
         grid = "We regret to inform you that we cannot proccess any of the columns from the provided dataframe."
-    for _type in _types:
-        if _type is DurationFrame:
-            panel_table = _type(df, time_unit="DAYS").table
-        else:
-            panel_table = _type(df).table
+    else:
+        intro_panel = _types[0](df).get_base_df_info()
+        grid.add_row(Columns(intro_panel))
+        for _type in _types:
+            if _type is DurationFrame:
+                panel_table = _type(df, time_unit="DAYS").table
+            else:
+                panel_table = _type(df).table
 
-        init_panel = Panel(panel_table, title="", border_style="black", padding=(0, 0))
-        grid.add_row(init_panel)
+            type_specific_panel = Panel(
+                panel_table, title="", border_style="black", padding=(0, 0)
+            )
+            grid.add_row(type_specific_panel)
 
     final_panel = Panel(
         grid,
