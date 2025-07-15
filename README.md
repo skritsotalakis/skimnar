@@ -105,4 +105,4 @@ pip install -e .
 
 ## License
 
-Distributed under the terms of the [MIT](https://opensource.org/license/MIT) license, skimpy is free and open source software.
+Distributed under the terms of the [MIT](https://opensource.org/license/MIT) license, skimnar is free and open source software.
