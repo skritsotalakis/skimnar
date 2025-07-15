@@ -3,7 +3,7 @@ from skimnar.utils import _selector_map, from_valid_native
 import narwhals as nw
 import rich
 from rich.table import Table
-from typing import Union, Literal
+from typing import Union, Literal, List
 from narwhals.typing import IntoDataFrame
 from narwhals.dataframe import DataFrame
 
@@ -21,7 +21,7 @@ class BaseFrame(ABC):
         self.frame_type = frame_type
         self.selector = _selector_map()[self.frame_type]
         self.df = self.select_frame()
-        self.sum_df = self.get_summary_data()
+        self.sum_df = self.get_sum_df(self.df.columns)
         self.table = self.frame_to_table(self.frame_type.upper())
 
     def __repr__(self) -> str:
@@ -42,9 +42,11 @@ class BaseFrame(ABC):
             raise ValueError(f"The dataframe has no {self.frame_type} columns.")
         return frame
 
-    def get_summary_data(self) -> DataFrame:
-        """Return the summary DataFrame for all columns."""
-        col_list = self.df.columns
+    def get_sum_df(self, col_list: Union[str, List[str]]) -> DataFrame:
+        """Returns the summary DataFrame for all columns."""
+        if isinstance(col_list, str):
+            col_list = [col_list]
+
         results = []
         for col_name in col_list:
             if not self.is_column_null(col_name):
@@ -54,7 +56,7 @@ class BaseFrame(ABC):
 
     def frame_to_table(self, title: str) -> rich.table.Table:
         """Returns a rich table from a dataframe."""
-        df = self.get_summary_data().select(nw.all().cast(nw.String))
+        df = self.sum_df.select(nw.all().cast(nw.String))
         table = Table(
             show_header=True, header_style="magenta", title=title, title_justify="left"
         )
