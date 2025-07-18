@@ -87,7 +87,7 @@ STRING
 ## Installation
 
 ```bash
-git clone git@github.com:skritsotalakis/skimnar.git
+git clone https://github.com/skritsotalakis/skimnar.git
 cd skimnar
 pip install -e .
 ```
